@@ -32,7 +32,7 @@ public class AccessPanel {
          }
       } while (statusNumber == 1);
 
-      switch (statusNumber) {
+      switch (statusNumber) { //creates user profile
          case 1:
             if (haveAdminCode())
                if (checkAdminCode())
@@ -44,7 +44,7 @@ public class AccessPanel {
       }
    }
 
-   public static int checkStatus() {
+   public static int checkStatus() { //gets status of user
       System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       int num = kb.nextInt();
       if (num != 1 || num != 2 || num != 3) {
@@ -55,7 +55,7 @@ public class AccessPanel {
       return num;
    }
 
-   public static boolean haveAdminCode() {
+   public static boolean haveAdminCode() { //asks user if he/she has an admin code
       System.out.println("Do you have an admin code?(Y/N)\n-->");
       String userYesOrNo = kb.nextLine();
       if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'y') {
@@ -72,8 +72,7 @@ public class AccessPanel {
       return false;
    }
 
-
-   public static boolean checkAdminCode() {
+   public static boolean checkAdminCode() { //checks user's admin code
       boolean check;
       System.out.print("Enter your admin code:\n-->");
       check = kb.nextLine().equals("abc123"); //abc123 is the admin code.
