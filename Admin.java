@@ -1,18 +1,26 @@
 public class Admin extends User {
 
-   public Admin(String username, String password) {
-      setUsername(username);
-      setPassword(password);
-      setStatus("Admin");
-      setAdmin();
-   }
+  private ArrayList<String> password = new ArrayList<String>("0000");
+  private ArrayList<String[]> Users = new ArrayList<String[]>();
 
-   /*
-   public String toString() {
-      String userInfo;
-      userInfo = "Username: " + getUsername()
-            + "Status: " + getStatus;
-      return userInfo;
-   }
-   */
+  public Admin(String username, String password) {
+    setUsername(username);
+    setPassword(password);
+    setStatus("Admin");
+    setAdmin();
+  }
+
+  public void addPassword(String pass){
+    password.add(pass);
+  }
+
+
+  /*
+  public String toString() {
+  String userInfo;
+  userInfo = "Username: " + getUsername()
+  + "Status: " + getStatus;
+  return userInfo;
+  }
+  */
 }

@@ -21,6 +21,10 @@ public class User { // User class is the SuperClass
       admin = true;
    }
 
+   public void addUser(User user){
+
+   }
+
    public String getUsername() {
       return username;
    }
