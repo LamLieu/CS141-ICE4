@@ -1,4 +1,4 @@
-public abstract class User { // Explicitly states that the User class is the SuperClass
+public class User { // User class is the SuperClass
    private String status, username, password;
    private boolean admin = false;
 

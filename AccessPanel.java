@@ -27,12 +27,16 @@ public class AccessPanel {
          if (haveAdminCode()) {
             if (!checkAdminCode())
                statusNumber = checkStatus();
-            else break;
+            else
+               break;
          }
       } while (statusNumber == 1);
+
       switch (statusNumber) {
          case 1:
-            if (haveAdminCode()) if (checkAdminCode()) user = new Admin(username, password);
+            if (haveAdminCode())
+               if (checkAdminCode())
+                  user = new Admin(username, password);
          case 2:
             user = new Vendor(username, password);
          case 3:
@@ -73,10 +77,12 @@ public class AccessPanel {
       boolean check;
       System.out.print("Enter your admin code:\n-->");
       check = kb.nextLine().equals("abc123"); //abc123 is the admin code.
-      if (check) return true;
+      if (check)
+         return true;
       else {
          System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
-         if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y') checkAdminCode();
+         if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
+            checkAdminCode();
       }
       return false;
    }
