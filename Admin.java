@@ -11,12 +11,16 @@ public class Admin extends User {
       setAdmin();
    }
 
-   /*
-   public String toString() {
-      String userInfo;
-      userInfo = "Username: " + getUsername()
-            + "Status: " + getStatus;
-      return userInfo;
-   }
-   */
+  public void addPassword(String pass){
+    password.add(pass);
+  }
+
+  /*
+  public String toString() {
+  String userInfo;
+  userInfo = "Username: " + getUsername()
+  + "Status: " + getStatus;
+  return userInfo;
+  }
+  */
 }
