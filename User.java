@@ -4,6 +4,10 @@ public class User { // User class is the SuperClass
    private boolean admin = false, vendor = false, guest = false; //Sets each user's status
    private double price = 1.0; //Price of ticket
 
+   public void addUser(User user){
+
+   }
+
    public void setUsername(String username) {
       this.username = username;
    }
@@ -50,9 +54,5 @@ public class User { // User class is the SuperClass
 
    public boolean isGuest() {
       return guest;
-   }
-
-   public void addUser(User user){
-
    }
 }
