@@ -1,8 +1,8 @@
 public class User { // User class is the SuperClass
 
-   private String username, password;
-   private boolean admin = false, vendor = false, guest = false;
-   private double price = 1.0;
+   private String username, password; //Stores username and password of user
+   private boolean admin = false, vendor = false, guest = false; //Sets each user's status
+   private double price = 1.0; //Price of ticket
 
    public void setUsername(String username) {
       this.username = username;
