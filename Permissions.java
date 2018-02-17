@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Permissions { //May want to change class name
 
    private User user;
+   private Admin admin;
+   private Guest guest;
+   private Vendor vendor;
 
    public Permissions(User user) {
       this.user = user;
@@ -11,6 +14,7 @@ public class Permissions { //May want to change class name
    public void chooseOption() {
       Scanner kb = new Scanner(System.in);
       int choice;
+      String name;
       if (user.isAdmin()) { //Admin options
          System.out.print("What do you want to do:\n(1)Create a Vendor or Guest Account.\n" +
                "(2)Set new ticket prices.\n(3)Change Password.\n(4)Exit Program.");
@@ -18,7 +22,21 @@ public class Permissions { //May want to change class name
             choice = kb.nextInt();
             switch (choice) {
                case 1: //Need to add account creation
-                  ;
+                  System.out.print("Which type of account would you like to create? \n(1)Create a Vendor \n(2)Guest Account.\n");
+                  choice = kb.nextInt();
+                  do{
+                    switch (choice) {
+                      case 1:
+                        System.out.print("What is the guest name?")
+                        name = kb.nextLine;
+                        guest = new Guest(name);
+                      case 2:
+                        System.out.print("What is the vendor name?")
+                        name = kb.nextLine;
+                        vendor = new Vendor(name);
+                      default:
+                         System.out.println("Error: Please enter 1 or 2");
+                  } while(choice != 1 || choice != 2);
                case 2:
                   System.out.printf("The price of a ticket is currently $%.2f.\n", user.getPrice());
                   System.out.print("Would you like to set a new ticket price?(Y/N)\n-->");
