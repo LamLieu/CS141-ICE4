@@ -3,10 +3,10 @@
 public class AccessPanel {
 
    public static void main(String[] args) {
-      User user;
+      System.out.println("Welcome to your Access Panel.");
       Login login = new Login();
-      user = login.getUser();
-      Permissions actions = new Permissions(user);
-      actions.action();
+      User user = login.getUser();
+      Permissions actions = new Permissions(user); //Should probably change variable name
+      actions.chooseOption();
    }
 }
