@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Vendor extends User {
 
   private ArrayList<String[]> Users = new ArrayList<String[]>();
@@ -5,6 +7,6 @@ public class Vendor extends User {
    public Vendor(String username, String password) {
       setUsername(username);
       setPassword(password);
-      setStatus("Vendor");
+      setVendor();
    }
 }
