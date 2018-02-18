@@ -1,8 +1,18 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class Guest extends User {
 
   private ArrayList<String> guestUsers = new ArrayList<String>();
+
+    public Guest(){
+      readGuestFile();
+    }
+
+    public Guest(String name){
+      guestUsers.add(name);
+    }
 
    public Guest(String username, String password) {
       setUsername(username);
@@ -10,22 +20,22 @@ public class Guest extends User {
       setGuest();
    }
 
-   public void readGuestFile(){
+   public void readGuestFile() throws IOException{
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){
-     String str = inputFile.nextLine();
-     guestUsers.add(str);
+       String str = inputFile.nextLine();
+       guestUsers.add(str);
      }
      inputFile.close();
    }
 
    public void removeGuest(String user){
      if(guestUsers.indexOf(user) < 0){
-       System.out.println("That user is not registered. Please enter the name of a registered user.");
+       System.out.print("That user is not registered. Please enter the name of a registered user.\n-->");
      }
      else{
-       adminUsers.remove(guestUsers.indexOf(user));
+       guestUsers.remove(guestUsers.indexOf(user));
        System.out.println(user + " has been removed.");
      }
    }

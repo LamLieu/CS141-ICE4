@@ -1,14 +1,22 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class Admin extends User {
 
-   private ArrayList<String> password = new ArrayList<String>("0000");
-   private ArrayList<String> adminUsers = new ArrayList<String>("admin");
+   private ArrayList<String> password = new ArrayList<String>();
+   private ArrayList<String> adminUsers = new ArrayList<String>();
 
    public Admin(){
-
+     password.add(0, "0000");
+     adminUsers.add(0, "admin");
+     readAdminFile();
    }
-   
+
+   public Admin(String name){
+     adminUsers.add(name);
+   }
+
    public Admin(String username, String password) {
       setUsername(username);
       setPassword(password);
@@ -19,19 +27,19 @@ public class Admin extends User {
      password.add(pass);
    }
 
-   public void readAdminFile(){
+   public void readAdminFile() throws IOException{
      File file = new File("adminUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){
-     String str = inputFile.nextLine();
-     adminUsers.add(str);
+       String str = inputFile.nextLine();
+       adminUsers.add(str);
      }
      inputFile.close();
    }
 
    public void removeAdmin(String user){
      if(adminUsers.indexOf(user) < 0){
-       System.out.println("That user is not registered. Please enter the name of a registered user.");
+       System.out.print("That user is not registered. Please enter the name of a registered user.\n-->");
      }
      else{
        adminUsers.remove(adminUsers.indexOf(user));

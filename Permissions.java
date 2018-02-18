@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Permissions { //May want to change class name
 
@@ -27,16 +28,20 @@ public class Permissions { //May want to change class name
                   do{
                     switch (choice) {
                       case 1:
-                        System.out.print("What is the guest name?")
-                        name = kb.nextLine;
+                        System.out.print("What is the guest name?\n-->");
+                        name = kb.nextLine();
                         guest = new Guest(name);
+                        break;
                       case 2:
-                        System.out.print("What is the vendor name?")
-                        name = kb.nextLine;
+                        System.out.print("What is the vendor name?\n-->");
+                        name = kb.nextLine();
                         vendor = new Vendor(name);
+                        break;
                       default:
-                         System.out.println("Error: Please enter 1 or 2");
+                         System.out.println("Error: Please enter 1 or 2\n-->");
+                    }
                   } while(choice != 1 || choice != 2);
+                  break;
                case 2:
                   System.out.printf("The price of a ticket is currently $%.2f.\n", user.getPrice());
                   System.out.print("Would you like to set a new ticket price?(Y/N)\n-->");
@@ -44,6 +49,7 @@ public class Permissions { //May want to change class name
                      System.out.print("Enter the new ticket price.\n-->");
                      user.setPrice(kb.nextInt());
                   }
+                  break;
                case 3:
                   String currentPasswordInput;
                   do {
@@ -57,6 +63,7 @@ public class Permissions { //May want to change class name
                         System.out.println("Error: Wrong password. Please reenter your password or type '-1' to exit");
                      }
                   } while (Integer.parseInt(currentPasswordInput) != 1 || !currentPasswordInput.equals(user.getPassword()));
+                  break;
                case 4:
                   System.out.println("Thank you for using the access panel.");
                   System.exit(0);
@@ -66,10 +73,55 @@ public class Permissions { //May want to change class name
          } while (choice < 1 || choice > 4);
       }
       else if (user.isVendor()) { //Need to add permissions
-
+        do{
+          System.out.print("Would you like to \n(1)Remove yourself from the list of vendors\n(2)View the number of guests");
+          choice = kb.nextInt();
+          switch (choice) {
+            case 1:
+              System.out.print("What is the guest name?\n-->");
+              name = kb.nextLine();
+              guest = new Guest(name);
+              break;
+            case 2:
+              System.out.print("What is the vendor name?\n-->");
+              name = kb.nextLine();
+              vendor = new Vendor(name);
+              break;
+            default:
+               System.out.print("Error: Please enter 1 or 2\n-->");
+          }
+        } while(choice != 1 || choice != 2);
       }
       else if (user.isGuest()) { //Need to add permissions
-
+        guest = new Guest();
+        vendor = new Vendor();
+        do{
+          System.out.println("Would you like to \n(1)Refund your tickets\n(2)View the vendors");
+          choice = kb.nextInt();
+          switch (choice) {
+            case 1:
+              System.out.print("What is your username?\n-->");
+              name = kb.nextLine();
+              guest.removeGuest(name);
+              break;
+            case 2:
+              System.out.println("Here are the vendors:");
+              vendor.readVendors();
+              break;
+            default:
+               System.out.print("Error: Please enter 1 or 2\n-->");
+          }
+        } while(choice != 1 || choice != 2);
       }
+   }
+
+   public void endOfProgram(){
+     guest = new Guest();
+     vendor = new Vendor();
+     admin = new Admin();
+
+     guest.writeGuestsToFile();
+     vendor.writeVendorsToFile();
+     admin.writeAdminsToFile();
    }
 }

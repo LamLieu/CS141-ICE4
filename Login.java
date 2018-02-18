@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.*;
+
 public class Login {
 
    private User user;
@@ -37,8 +39,9 @@ public class Login {
    }
 
    public int checkStatus() { //gets status of user
+     int num;
       while(true){
-        int num = kb.nextInt();
+        num = kb.nextInt();
         kb.nextLine();
         if (num != 1 || num != 2 || num != 3) {
            System.out.println("Error: Please enter 1, 2, or 3.");
@@ -64,15 +67,16 @@ public class Login {
            System.out.println("Error: Please enter 'Y' or 'N'.");
         }
       }
-      return false;
    }
 
    public boolean checkAdminCode() { //checks user's admin code
       boolean check;
       Admin admin = new Admin();
+      String pass;
       System.out.print("Enter your admin code:\n-->");
+      pass = kb.nextLine();
       while(true){
-        check = admin.checkPass(); //uses method from admin class
+        check = admin.checkPass(pass); //uses method from admin class
         if (check)
            return true;
         else {
@@ -81,7 +85,6 @@ public class Login {
               checkAdminCode();
         }
       }
-      return false;
    }
 
    public User getUser() {

@@ -1,32 +1,48 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class Vendor extends User {
 
   private ArrayList<String> vendorUsers = new ArrayList<String>();
 
-   public Vendor(String username, String password) {
+    public Vendor(){
+      readVendorFile();
+    }
+
+    public Vendor(String name){
+      vendorUsers.add(name);
+    }
+
+    public Vendor(String username, String password) {
       setUsername(username);
       setPassword(password);
       setVendor();
-   }
+    }
 
-   public void readGuestFile(){
+   public void readVendorFile() throws IOException{
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){
-     String str = inputFile.nextLine();
-     vendorUsers.add(str);
+       String str = inputFile.nextLine();
+       vendorUsers.add(str);
      }
      inputFile.close();
    }
 
    public void removeVendor(String user){
      if(vendorUsers.indexOf(user) < 0){
-       System.out.println("That user is not registered. Please enter the name of a registered user.");
+       System.out.print("That user is not registered. Please enter the name of a registered user.\n-->");
      }
      else{
-       adminUsers.remove(vendorUsers.indexOf(user));
+       vendorUsers.remove(vendorUsers.indexOf(user));
        System.out.println(user + " has been removed.");
+     }
+   }
+
+   public void readVendors(){
+     for(int i = 0; i < vendorUsers.size(); i++){
+       System.out.println(vendorUsers.get(i));
      }
    }
 

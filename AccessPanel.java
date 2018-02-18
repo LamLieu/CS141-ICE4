@@ -8,5 +8,6 @@ public class AccessPanel {
       User user = login.getUser(); //Stores user profile
       Permissions actions = new Permissions(user); //Passes user profile to see what each user can do based on their status
       actions.chooseOption(); //User chooses what they want to do
+      actions.endOfProgram(); //Writes all stored/changed data to files
    }
 }
