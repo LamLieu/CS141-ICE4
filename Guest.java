@@ -9,4 +9,10 @@ public class Guest extends User {
       setPassword(password);
       setGuest();
    }
+
+   public Guest(Guest guest) { //Copy constructor
+   setUsername(guest.getUsername());
+   setPassword(guest.getPassword());
+   setGuest();
+   }
 }

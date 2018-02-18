@@ -9,4 +9,10 @@ public class Vendor extends User {
       setPassword(password);
       setVendor();
    }
+
+    public Vendor(Vendor vendor) { //Copy constructor
+        setUsername(vendor.getUsername());
+        setPassword(vendor.getPassword());
+        setGuest();
+    }
 }

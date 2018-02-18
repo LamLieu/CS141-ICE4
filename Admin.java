@@ -11,6 +11,12 @@ public class Admin extends User {
       setAdmin();
    }
 
+    public Admin(Admin admin) { //Copy constructor
+        setUsername(admin.getUsername());
+        setPassword(admin.getPassword());
+        setGuest();
+    }
+
   public void addPassword(String pass){
        password.add(pass);
   }

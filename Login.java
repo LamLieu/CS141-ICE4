@@ -13,16 +13,22 @@ public class Login {
       System.out.print("Enter your Password:\n-->");
       password = kb.nextLine();
 
-      System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       statusNumber = checkStatus();
-      do { //Checks if the admin has an admin code
-         if (haveAdminCode()) {
-            if (!checkAdminCode())
+      while (statusNumber == 1) { //Checks if the admin has an admin code
+         boolean hasAdminCode = askForAdminCode();
+         if (hasAdminCode) {
+            if (!checkAdminCode()) {
                statusNumber = checkStatus();
+            }
             else
                break;
          }
-      } while (statusNumber == 1);
+         else  {
+            System.out.println("You need to have an admin code to become an admin.");
+            System.out.println("Please select a new status.");
+            statusNumber = checkStatus();
+         }
+      }
 
       switch (statusNumber) { //creates user profile
          case 1:
@@ -35,6 +41,7 @@ public class Login {
    }
 
    public int checkStatus() { //gets status of user
+      System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       int num = kb.nextInt();
       kb.nextLine();
       if (num == 1 || num == 2 || num == 3) {
@@ -43,12 +50,11 @@ public class Login {
       else {
          System.out.println("Error: Please enter 1, 2, or 3.");
          System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
-         checkStatus();
+         return checkStatus();
       }
-      return num;
    }
 
-   public boolean haveAdminCode() { //asks user if he/she has an admin code
+   public boolean askForAdminCode() { //asks user if he/she has an admin code
       System.out.print("Do you have an admin code?(Y/N)\n-->");
       String userYesOrNo = kb.nextLine();
       if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'y') {
@@ -59,7 +65,7 @@ public class Login {
       }
       else {
          System.out.println("Error: Please enter 'Y' or 'N'.");
-         return haveAdminCode();
+         return askForAdminCode();
       }
    }
 
@@ -71,20 +77,19 @@ public class Login {
          return true;
       else {
          System.out.println("Error: Invalid Admin Code.");
-         askReenterCode();
+         return askReenterCode();
       }
-      return false;
    }
 
-   public void askReenterCode() {
+   public boolean askReenterCode() {
       System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
       if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
-         checkAdminCode();
+         return checkAdminCode();
       else if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'n')
-         System.exit(0);
+         return false;
       else {
          System.out.println("Error: Please enter 'Y' or 'N'");
-         askReenterCode();
+         return askReenterCode();
       }
    }
    public User getUser() {

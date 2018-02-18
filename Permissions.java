@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class Permissions {
 
    private User user;
+   private static Scanner kb = new Scanner(System.in);
 
-   public Permissions(User user) {
-      this.user = user;
+   public Permissions(User userProfile) {
+      this.user = userProfile;
    }
 
    public void chooseOption() {
-      Scanner kb = new Scanner(System.in);
       int choice;
       if (user.isAdmin()) { //Admin options
          System.out.print("What do you want to do:\n(1)Create a Vendor or Guest Account.\n" +
@@ -34,6 +34,7 @@ public class Permissions {
                      if (kb.nextLine().equals(user.getPassword())) {
                         System.out.print("Enter your new password.\n-->");
                         user.setPassword(kb.nextLine());
+                        System.out.println("Success!");
                      }
                      else if (kb.nextLine().equals("-1")) {
                         System.exit(0);
@@ -49,6 +50,7 @@ public class Permissions {
                   System.out.println("Error: Please enter 1, 2, 3, or 4.");
             }
          } while (choice < 1 || choice > 4);
+         chooseOption(); //Keep asking user for actions
       }
       else if (user.isVendor()) { //Need to add permissions
 
@@ -56,5 +58,7 @@ public class Permissions {
       else if (user.isGuest()) { //Need to add permissions
 
       }
+      else
+         System.exit(0);
    }
 }
