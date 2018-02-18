@@ -16,7 +16,7 @@ public class Permissions {
    }
 
    public void chooseOption() {
-      System.out.println("hi");
+      System.out.println("hi"); //testing call
       int choice;
       Scanner kb = new Scanner(System.in);
       if (user.isAdmin()) { //Admin options
@@ -33,6 +33,7 @@ public class Permissions {
                   if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y') {
                      System.out.print("Enter the new ticket price.\n-->");
                      user.setPrice(kb.nextInt());
+                     System.out.printf("The new ticket price is %.2f.", user.getPrice());
                   }
                case 3:
                   String currentPasswordInput, newPasswordInput;
