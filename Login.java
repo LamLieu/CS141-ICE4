@@ -55,7 +55,7 @@ public class Login {
    }
 
    public boolean askForAdminCode() { //asks user if he/she has an admin code
-      System.out.print("Do you have an admin code?(Y/N)\n-->");
+      System.out.print("Do you have an admin code?(Y/N):\n-->");
       String userYesOrNo = kb.nextLine();
       if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'y') {
          return true;
@@ -82,13 +82,13 @@ public class Login {
    }
 
    public boolean askReenterCode() {
-      System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
+      System.out.print("Would you like to reenter your admin code?(Y/N):\n-->");
       if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
          return checkAdminCode();
       else if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'n')
          return false;
       else {
-         System.out.println("Error: Please enter 'Y' or 'N'");
+         System.out.println("Error: Please enter 'Y' or 'N'.");
          return askReenterCode();
       }
    }
