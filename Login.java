@@ -1,12 +1,11 @@
 import java.util.Scanner;
 public class Login {
 
-   private User user;
+   private String username, password;
+   private int statusNumber;
    private static Scanner kb = new Scanner(System.in);
 
    public Login() {
-      String username, password;
-      int statusNumber;
       System.out.println("Please enter your username and password.");
       System.out.print("Enter your Username:\n-->");
       username = kb.nextLine();
@@ -28,15 +27,6 @@ public class Login {
             System.out.println("Please select a new status.");
             statusNumber = checkStatus();
          }
-      }
-
-      switch (statusNumber) { //creates user profile
-         case 1:
-            user = new Admin(username, password);
-         case 2:
-            user = new Vendor(username, password);
-         case 3:
-            user = new Guest(username, password);
       }
    }
 
@@ -92,7 +82,15 @@ public class Login {
          return askReenterCode();
       }
    }
-   public User getUser() {
-      return user;
+
+   public String getUsername() {
+      return username;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+   public int getStatusNumber() {
+      return statusNumber;
    }
 }
