@@ -26,9 +26,7 @@ public class Login {
 
       switch (statusNumber) { //creates user profile
          case 1:
-            if (haveAdminCode())
-               if (checkAdminCode())
-                  user = new Admin(username, password);
+            user = new Admin(username, password);
          case 2:
             user = new Vendor(username, password);
          case 3:
@@ -39,18 +37,19 @@ public class Login {
    public int checkStatus() { //gets status of user
       int num = kb.nextInt();
       kb.nextLine();
-      if (num != 1 || num != 2 || num != 3) {
+      if (num == 1 || num == 2 || num == 3) {
+         return num;
+      }
+      else {
          System.out.println("Error: Please enter 1, 2, or 3.");
          System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
          checkStatus();
       }
-      else
-         return num;
       return num;
    }
 
    public boolean haveAdminCode() { //asks user if he/she has an admin code
-      System.out.println("Do you have an admin code?(Y/N)\n-->");
+      System.out.print("Do you have an admin code?(Y/N)\n-->");
       String userYesOrNo = kb.nextLine();
       if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'y') {
          return true;
@@ -60,9 +59,8 @@ public class Login {
       }
       else {
          System.out.println("Error: Please enter 'Y' or 'N'.");
-         haveAdminCode();
+         return haveAdminCode();
       }
-      return false;
    }
 
    public boolean checkAdminCode() { //checks user's admin code
@@ -72,13 +70,23 @@ public class Login {
       if (check)
          return true;
       else {
-         System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
-         if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
-            checkAdminCode();
+         System.out.println("Error: Invalid Admin Code.");
+         askReenterCode();
       }
       return false;
    }
 
+   public void askReenterCode() {
+      System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
+      if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
+         checkAdminCode();
+      else if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'n')
+         System.exit(0);
+      else {
+         System.out.println("Error: Please enter 'Y' or 'N'");
+         askReenterCode();
+      }
+   }
    public User getUser() {
       return user;
    }

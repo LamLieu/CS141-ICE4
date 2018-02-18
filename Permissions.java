@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Permissions { //May want to change class name
+public class Permissions {
 
    private User user;
 
@@ -34,6 +34,9 @@ public class Permissions { //May want to change class name
                      if (kb.nextLine().equals(user.getPassword())) {
                         System.out.print("Enter your new password.\n-->");
                         user.setPassword(kb.nextLine());
+                     }
+                     else if (kb.nextLine().equals("-1")) {
+                        System.exit(0);
                      }
                      else {
                         System.out.println("Error: Wrong password. Please reenter your password or type '-1' to exit");
