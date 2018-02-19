@@ -7,7 +7,7 @@ public class AccessPanel {
 
       //Logs user into program
       Login login = new Login();
-      //Passes login info to
+      //Passes login info to create user profile
       Permissions actions = new Permissions(login.getUsername(), login.getPassword(), login.getStatusNumber());
       //User chooses what they want to do
       actions.chooseOption();

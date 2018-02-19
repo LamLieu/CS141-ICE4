@@ -12,7 +12,7 @@ public class Vendor extends User {
       setVendor();
    }
 
-   public void readGuestFile(){
+   public void readGuestFile()throws IOException {
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){

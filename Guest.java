@@ -12,7 +12,7 @@ public class Guest extends User {
       setGuest();
    }
 
-   public void readGuestFile(){
+   public void readGuestFile() throws IOException {
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){

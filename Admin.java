@@ -4,8 +4,8 @@ import java.io.*;
 
 public class Admin extends User {
 
-   private ArrayList<String> password = new ArrayList<String>("0000");
-   private ArrayList<String> adminUsers = new ArrayList<String>("admin");
+   private ArrayList<String> password = new ArrayList<String>();
+   private ArrayList<String> adminUsers = new ArrayList<String>();
 
    public Admin(){
 
@@ -21,7 +21,7 @@ public class Admin extends User {
      password.add(pass);
    }
 
-   public void readAdminFile(){
+   public void readAdminFile() throws IOException {
      File file = new File("adminUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){
