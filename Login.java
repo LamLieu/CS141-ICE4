@@ -61,6 +61,7 @@ public class Login {
 
    public boolean checkAdminCode() { //checks user's admin code
       boolean check;
+      Admin admin = new Admin();
       System.out.print("Enter your admin code:\n-->");
       check = kb.nextLine().equals("abc123"); //abc123 is the admin code.
       if (check)

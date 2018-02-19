@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Permissions {
 
    private User user;
+   private Admin admin;
+   private Guest guest;
+   private Vendor vendor;
 
    public Permissions(String username, String password, int statusNumber) {
       switch (statusNumber) { //creates user profile
@@ -18,6 +21,7 @@ public class Permissions {
    public void chooseOption() {
       System.out.println("hi"); //testing call
       int choice;
+      String name;
       Scanner kb = new Scanner(System.in);
       if (user.isAdmin()) { //Admin options
          System.out.printf("Hello %s, What do you want to do:\n(1)Create a Vendor or Guest Account.\n" +
@@ -26,7 +30,21 @@ public class Permissions {
          do {
             switch (choice) {
                case 1: //Need to add account creation
-                  System.exit(0); //Temp
+                  System.out.print("Which type of account would you like to create? \n(1)Create a Vendor \n(2)Guest Account.\n");
+                  choice = kb.nextInt();
+                  do{
+                    switch (choice) {
+                      case 1:
+                        System.out.print("What is the guest name?")
+                        name = kb.nextLine;
+                        guest = new Guest(name);
+                      case 2:
+                        System.out.print("What is the vendor name?")
+                        name = kb.nextLine;
+                        vendor = new Vendor(name);
+                      default:
+                         System.out.println("Error: Please enter 1 or 2");
+                  } while(choice != 1 || choice != 2);
                case 2:
                   System.out.printf("The price of a ticket is currently $%.2f.\n", user.getPrice());
                   System.out.print("Would you like to set a new ticket price?(Y/N)\n-->");
