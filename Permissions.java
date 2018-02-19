@@ -41,7 +41,7 @@ public class Permissions {
                      System.out.print("Enter your current password.\n-->");
                      currentPasswordInput = kb.nextLine();
 
-                     if (kb.nextLine().equals(user.getPassword())) {
+                     if (currentPasswordInput.equals(user.getPassword())) {
                         System.out.print("Enter your new password.\n-->");
                         user.setPassword(kb.nextLine());
                         System.out.print("Confirm your new password.\n-->");
