@@ -2,68 +2,61 @@ import java.util.Scanner;
 
 public class Login {
 
-   private User user;
+   private String username, password;
+   private int statusNumber;
    private static Scanner kb = new Scanner(System.in);
 
    public Login() {
-      String username, password;
-      int statusNumber;
       System.out.println("Please enter your username and password.");
       System.out.print("Enter your Username:\n-->");
       username = kb.nextLine();
       System.out.print("Enter your Password:\n-->");
       password = kb.nextLine();
 
-      System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       statusNumber = checkStatus();
-      do { //Checks if the admin has an admin code
-         if (haveAdminCode()) {
-            if (!checkAdminCode())
+      while (statusNumber == 1) { //Checks if the admin has an admin code
+         boolean hasAdminCode = askForAdminCode();
+         if (hasAdminCode) {
+            if (!checkAdminCode()) {
                statusNumber = checkStatus();
+            }
             else
                break;
          }
-      } while (statusNumber == 1);
-
-      switch (statusNumber) { //creates user profile
-         case 1:
-            if (haveAdminCode())
-               if (checkAdminCode())
-                  user = new Admin(username, password);
-         case 2:
-            user = new Vendor(username, password);
-         case 3:
-            user = new Guest(username, password);
+         else  {
+            System.out.println("You need to have an admin code to become an admin.");
+            System.out.println("Please select a new status.");
+            statusNumber = checkStatus();
+         }
       }
    }
 
    public int checkStatus() { //gets status of user
+      System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       int num = kb.nextInt();
       kb.nextLine();
-      if (num != 1 || num != 2 || num != 3) {
-         System.out.println("Error: Please enter 1, 2, or 3.");
-         System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
-         checkStatus();
-      }
-      else
+      if (num == 1 || num == 2 || num == 3) {
          return num;
-      return num;
+      }
+      else {
+         System.out.println("Error: Please enter 1, 2, or 3.");
+         return checkStatus();
+      }
    }
 
-   public boolean haveAdminCode() { //asks user if he/she has an admin code
-      System.out.println("Do you have an admin code?(Y/N)\n-->");
-      String userYesOrNo = kb.nextLine();
-      if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'y') {
+   public boolean askForAdminCode() { //asks user if he/she has an admin code
+      System.out.print("Do you have an admin code?(Y/N):\n-->");
+      char userInput = Character.toLowerCase(kb.nextLine().charAt(0));
+      if (userInput == 'y') {
          return true;
       }
-      else if (Character.toLowerCase(userYesOrNo.charAt(0)) == 'n') {
+      else if (userInput == 'n') {
          return false;
       }
       else {
          System.out.println("Error: Please enter 'Y' or 'N'.");
-         haveAdminCode();
+         return askForAdminCode();
       }
-      return false;
    }
 
    public boolean checkAdminCode() { //checks user's admin code
@@ -73,14 +66,32 @@ public class Login {
       if (check)
          return true;
       else {
-         System.out.print("Would you like to reenter your admin code?(Y/N)\n-->");
-         if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
-            checkAdminCode();
+         System.out.println("Error: Invalid Admin Code.");
+         return askReenterCode();
       }
-      return false;
    }
 
-   public User getUser() {
-      return user;
+   public boolean askReenterCode() {
+      System.out.print("Would you like to reenter your admin code?(Y/N):\n-->");
+      char userInput = Character.toLowerCase(kb.nextLine().charAt(0));
+      if (userInput == 'y')
+         return checkAdminCode();
+      else if (userInput == 'n')
+         return false;
+      else {
+         System.out.println("Error: Please enter 'Y' or 'N'.");
+         return askReenterCode();
+      }
+   }
+
+   public String getUsername() {
+      return username;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+   public int getStatusNumber() {
+      return statusNumber;
    }
 }
