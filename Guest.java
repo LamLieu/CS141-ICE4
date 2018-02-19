@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class Guest extends User {
 
@@ -10,7 +12,7 @@ public class Guest extends User {
       setGuest();
    }
 
-   public void readGuestFile(){
+   public void readGuestFile() throws IOException {
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){
@@ -25,7 +27,7 @@ public class Guest extends User {
        System.out.println("That user is not registered. Please enter the name of a registered user.");
      }
      else{
-       adminUsers.remove(guestUsers.indexOf(user));
+       guestUsers.remove(guestUsers.indexOf(user));
        System.out.println(user + " has been removed.");
      }
    }
