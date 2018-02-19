@@ -86,7 +86,7 @@ public class Permissions {
                      else {
                         System.out.println("Error: Wrong password. Please reenter your password or type '-1' to exit");
                      }
-                  } while (Integer.parseInt(currentPasswordInput) != 1 || !currentPasswordInput.equals(user.getPassword()));
+                  } while (!currentPasswordInput.equals(user.getPassword()) || !currentPasswordInput.equals("-1"));
                   break;
                case 4:
                   System.out.println("Thank you for using the access panel.");
@@ -100,11 +100,11 @@ public class Permissions {
          chooseOption(); //Recursive call
       }
       else if (user.isVendor()) { //Need to add permissions
-         System.out.printf("Hello %s, what do you want to do:\n(1)", user.getUsername());
+         System.out.printf("Hello %s, what do you want to do:\n(1) ", user.getUsername());
          //chooseOption();
       }
       else if (user.isGuest()) { //Need to add permissions
-         System.out.printf("Hello %s, what do you want to do:\n(1)", user.getUsername());
+         System.out.printf("Hello %s, what do you want to do:\n(1) ", user.getUsername());
          //chooseOption();
       }
    }
