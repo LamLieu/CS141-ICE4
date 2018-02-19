@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class Vendor extends User {
 
@@ -25,7 +27,7 @@ public class Vendor extends User {
        System.out.println("That user is not registered. Please enter the name of a registered user.");
      }
      else{
-       adminUsers.remove(vendorUsers.indexOf(user));
+       vendorUsers.remove(vendorUsers.indexOf(user));
        System.out.println(user + " has been removed.");
      }
    }

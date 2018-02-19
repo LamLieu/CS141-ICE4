@@ -35,16 +35,18 @@ public class Permissions {
                   do{
                     switch (choice) {
                       case 1:
-                        System.out.print("What is the guest name?")
-                        name = kb.nextLine;
+                        System.out.print("What is the guest name?");
+                        name = kb.nextLine();
                         guest = new Guest(name);
                       case 2:
-                        System.out.print("What is the vendor name?")
-                        name = kb.nextLine;
+                        System.out.print("What is the vendor name?");
+                        name = kb.nextLine();
                         vendor = new Vendor(name);
                       default:
                          System.out.println("Error: Please enter 1 or 2");
-                  } while(choice != 1 || choice != 2);
+                         choice = kb.nextInt();
+                    }
+                  } while(choice != 1 && choice != 2);
                case 2:
                   System.out.printf("The price of a ticket is currently $%.2f.\n", user.getPrice());
                   System.out.print("Would you like to set a new ticket price?(Y/N)\n-->");

@@ -74,9 +74,10 @@ public class Login {
 
    public boolean askReenterCode() {
       System.out.print("Would you like to reenter your admin code?(Y/N):\n-->");
-      if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'y')
+      char userAnswer = Character.toLowerCase(kb.nextLine().charAt(0));
+      if (userAnswer == 'y')
          return checkAdminCode();
-      else if (Character.toLowerCase(kb.nextLine().charAt(0)) == 'n')
+      else if (userAnswer == 'n')
          return false;
       else {
          System.out.println("Error: Please enter 'Y' or 'N'.");
