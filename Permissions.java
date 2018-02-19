@@ -34,7 +34,7 @@ public class Permissions {
                case 1:
                   System.out.print("Which type of account would you like to create? \n(1)Create a Vendor \n(2)Guest Account.\n");
                   choice = kb.nextInt();
-                  do{
+                  do {
                     switch (choice) {
                       case 1:
                         System.out.print("What is the guest name?");
@@ -62,7 +62,7 @@ public class Permissions {
                case 3:
                   String currentPasswordInput, newPasswordInput;
                   do {
-                     System.out.print("Enter your current password.\n-->");
+                     System.out.print("Enter your current password. (or -1 to go back to menu)\n-->");
                      currentPasswordInput = kb.nextLine();
 
                      if (currentPasswordInput.equals(user.getPassword())) {
@@ -81,7 +81,7 @@ public class Permissions {
                         }
                      }
                      else if (kb.nextLine().equals("-1")) {
-                        System.exit(0);
+                        break;
                      }
                      else {
                         System.out.println("Error: Wrong password. Please reenter your password or type '-1' to exit");
@@ -91,13 +91,12 @@ public class Permissions {
                case 4:
                   System.out.println("Thank you for using the access panel.");
                   System.exit(0);
-                  break;
                default:
                   System.out.println("Error: Please enter 1, 2, 3, or 4.");
                   choice = kb.nextInt();
             }
          } while (choice < 1 || choice > 4);
-         chooseOption(); //Recursive call
+         chooseOption();
       }
       else if (user.isVendor()) { //Need to add permissions
          System.out.printf("Hello %s, what do you want to do:\n(1) ", user.getUsername());
