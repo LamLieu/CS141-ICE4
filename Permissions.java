@@ -169,7 +169,6 @@ public class Permissions {
                   System.exit(0);
                default:
                   System.out.println("Error: Please enter 1, 2, 3, 4, 5, 6, or 7.");
-                  choice = kb.nextInt();
             }
          } while (choice < 1 || choice > 7);
          System.out.println("Returning back to menu...");
