@@ -4,9 +4,9 @@ import java.io.*;
 public class Permissions { //May want to change class name
 
    private User user;
-   private Admin admin;
-   private Guest guest;
-   private Vendor vendor;
+   private Guest guest = new Guest();
+   private Vendor vendor = new Vendor();
+   private Admin admin = new Admin();
 
    public Permissions(User user) {
       this.user = user;
@@ -30,12 +30,12 @@ public class Permissions { //May want to change class name
                       case 1:
                         System.out.print("What is the guest name?\n-->");
                         name = kb.nextLine();
-                        guest = new Guest(name);
+                        guest.addGuest(name);
                         break;
                       case 2:
                         System.out.print("What is the vendor name?\n-->");
                         name = kb.nextLine();
-                        vendor = new Vendor(name);
+                        vendor.addVendor(name);
                         break;
                       default:
                          System.out.println("Error: Please enter 1 or 2\n-->");
@@ -78,14 +78,12 @@ public class Permissions { //May want to change class name
           choice = kb.nextInt();
           switch (choice) {
             case 1:
-              System.out.print("What is the guest name?\n-->");
-              name = kb.nextLine();
-              guest = new Guest(name);
-              break;
-            case 2:
               System.out.print("What is the vendor name?\n-->");
               name = kb.nextLine();
-              vendor = new Vendor(name);
+              vendor.removeVendor(name);
+              break;
+            case 2:
+              System.out.print("There are " + guest.numGuest() + " registered guests.");
               break;
             default:
                System.out.print("Error: Please enter 1 or 2\n-->");
@@ -93,8 +91,6 @@ public class Permissions { //May want to change class name
         } while(choice != 1 || choice != 2);
       }
       else if (user.isGuest()) { //Need to add permissions
-        guest = new Guest();
-        vendor = new Vendor();
         do{
           System.out.println("Would you like to \n(1)Refund your tickets\n(2)View the vendors");
           choice = kb.nextInt();
@@ -116,10 +112,6 @@ public class Permissions { //May want to change class name
    }
 
    public void endOfProgram(){
-     guest = new Guest();
-     vendor = new Vendor();
-     admin = new Admin();
-
      guest.writeGuestsToFile();
      vendor.writeVendorsToFile();
      admin.writeAdminsToFile();

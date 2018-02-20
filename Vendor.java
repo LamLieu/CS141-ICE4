@@ -15,19 +15,25 @@ public class Vendor extends User {
     }
 
     public Vendor(String username, String password) {
-      setUsername(username);
-      setPassword(password);
-      setVendor();
+      vendorUsers.add(name);
     }
 
-   public void readVendorFile() throws IOException{
-     File file = new File("guestUsers.dat");
-     Scanner inputFile = new Scanner(file);
-     while (inputFile.hasNext()){
-       String str = inputFile.nextLine();
-       vendorUsers.add(str);
-     }
-     inputFile.close();
+    public void addVendor(String name){
+      vendorUsers.add(name);
+    }
+
+   public void readVendorFile(){
+     try{
+       File file = new File("guestUsers.dat");
+       Scanner inputFile = new Scanner(file);
+       while (inputFile.hasNext()){
+         String str = inputFile.nextLine();
+         vendorUsers.add(str);
+       }
+       inputFile.close();
+     } catch(FileNotFoundException e){
+         e.printStackTrace();
+       }
    }
 
    public void removeVendor(String user){

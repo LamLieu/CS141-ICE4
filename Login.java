@@ -4,6 +4,9 @@ import java.io.*;
 public class Login {
 
    private User user;
+   private Guest guest = new Guest();
+   private Vendor vendor = new Vendor();
+   private Admin admin = new Admin();
    private static Scanner kb = new Scanner(System.in);
 
    public Login() {
@@ -17,14 +20,7 @@ public class Login {
 
       System.out.print("Are you an admin(1), vendor(2), or guest(3)?\n-->");
       statusNumber = checkStatus();
-      /*while (statusNumber == 1) { //Checks if the admin has an admin code
-         if (haveAdminCode()) {
-            if (!checkAdminCode())
-               statusNumber = checkStatus();
-            else
-               break;
-         }
-      }*/
+
 
       switch (statusNumber) { //creates user profile
          case 1:
@@ -71,7 +67,6 @@ public class Login {
 
    public boolean checkAdminCode() { //checks user's admin code
       boolean check;
-      Admin admin = new Admin();
       String pass;
       System.out.print("Enter your admin code:\n-->");
       pass = kb.nextLine();

@@ -15,19 +15,31 @@ public class Guest extends User {
     }
 
    public Guest(String username, String password) {
-      setUsername(username);
-      setPassword(password);
-      setGuest();
+      guestUsers.add(username);
    }
 
-   public void readGuestFile() throws IOException{
-     File file = new File("guestUsers.dat");
-     Scanner inputFile = new Scanner(file);
-     while (inputFile.hasNext()){
-       String str = inputFile.nextLine();
-       guestUsers.add(str);
+   public void addGuest(String name){
+     guestUsers.add(name);
+   }
+
+   public int numGuest(){
+     int guests;
+     guests = guestUsers.size();
+     return guests;
+   }
+
+   public void readGuestFile(){
+     try{
+       File file = new File("guestUsers.dat");
+       Scanner inputFile = new Scanner(file);
+       while (inputFile.hasNext()){
+         String str = inputFile.nextLine();
+         guestUsers.add(str);
+       }
+       inputFile.close();
+     } catch(FileNotFoundException e){
+       e.printStackTrace();
      }
-     inputFile.close();
    }
 
    public void removeGuest(String user){

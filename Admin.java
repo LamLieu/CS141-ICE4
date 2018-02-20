@@ -18,23 +18,30 @@ public class Admin extends User {
    }
 
    public Admin(String username, String password) {
-      setUsername(username);
-      setPassword(password);
-      setAdmin();
+      adminUsers.add(username);
+      password.add(password);
+   }
+
+   public void addAdmin(String name){
+     adminUsers.add(name);
    }
 
    public void addPassword(String pass){
      password.add(pass);
    }
 
-   public void readAdminFile() throws IOException{
-     File file = new File("adminUsers.dat");
-     Scanner inputFile = new Scanner(file);
-     while (inputFile.hasNext()){
-       String str = inputFile.nextLine();
-       adminUsers.add(str);
-     }
-     inputFile.close();
+   public void readAdminFile(){
+     try{
+       File file = new File("adminUsers.dat");
+       Scanner inputFile = new Scanner(file);
+       while (inputFile.hasNext()){
+         String str = inputFile.nextLine();
+         adminUsers.add(str);
+       }
+       inputFile.close();
+     } catch(FileNotFoundException e){
+         e.printStackTrace();
+       }
    }
 
    public void removeAdmin(String user){
