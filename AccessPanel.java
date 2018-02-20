@@ -84,11 +84,21 @@ public class AccessPanel {
 
    public static void main(String[] args) {
       System.out.println("Welcome to your Access Panel.");
+<<<<<<< HEAD
       //Login login = new Login(); //Logs user into program
       //User user = login.getUser(); //Stores user profile
       login();
       //Permissions actions = new Permissions(user); //Passes user profile to see what each user can do based on their status
       actions.chooseOption(); //User chooses what they want to do
       actions.endOfProgram(); //Writes all stored/changed data to files
+=======
+
+      //Logs user into program
+      Login login = new Login();
+      //Passes login info to
+      Permissions actions = new Permissions(login.getUsername(), login.getPassword(), login.getStatusNumber());
+      //User chooses what they want to do
+      actions.chooseOption();
+>>>>>>> 6f02f404295fa1e21e49fcafcc556747633298b1
    }
 }
