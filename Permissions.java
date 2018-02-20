@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Permissions {
 
@@ -21,7 +22,7 @@ public class Permissions {
       }
    }
 
-   public void chooseOption() {
+   public void chooseOption() throws IOException {
       int choice;
       String name;
       Scanner kb = new Scanner(System.in);
@@ -29,12 +30,16 @@ public class Permissions {
 
       //Admin Options
       if (user.isAdmin()) {
-         System.out.printf("Hello %s, What do you want to do:\n(1) Create a Vendor or Guest Account.\n" + "(2) Set new ticket prices.\n(3) Set new space price.\n" + "(4) Change Password.\n(5) Remove an account.\n " + "(6)View registered users\n(7) Exit Program.\n-->", user.getUsername());
+         System.out.printf("Hello %s, What do you want to do:\n(1) Create a Vendor or Guest Account.\n"
+               + "(2) Set new ticket prices.\n(3) Set new space price.\n"
+               + "(4) Change Password.\n(5) Remove an account.\n "
+               + "(6)View registered users\n(7) Exit Program.\n-->", user.getUsername());
          choice = kb.nextInt();
          do {
             switch (choice) {
                case 1:
-                  System.out.print("Which type of account would you like to create? \n(1) Create a Vendor\n" + "(2) Guest Account.\n-->");
+                  System.out.print("Which type of account would you like to create?\n(1) Create a Vendor\n"
+                        + "(2) Guest Account.\n-->");
                   choice = kb.nextInt();
                   do {
                      switch (choice) {
@@ -113,66 +118,68 @@ public class Permissions {
                         break;
                      }
                      else {
-                        System.out.println("Error: Wrong password.\n" +
-                              "Please reenter your password or type '-1' to return to menu.");
+                        System.out.println("Error: Wrong password.\n" + "Please reenter your password or type '-1' to return to menu.");
                      }
                   } while (!currentPasswordInput.equals(user.getPassword()) || !currentPasswordInput.equals("-1"));
                   break;
                case 5:
-                   System.out.print("Which account would you like to remove? \n(1) Guest Account\n" + "(2) Vendor Account.\n-->");
-                   choice = kb.nextInt();
-                   do {
-                      switch (choice) {
-                         case 1:
-                            System.out.print("What is the guest name?\n-->");
-                            name = kb.nextLine();
-                            guest.removeGuest(name);
-                            guest.writeGuestsToFile();
-                            break;
-                         case 2:
-                            System.out.print("What is the vendor name?\n-->");
-                            name = kb.nextLine();
-                            vendor.removeVendor(name);
-                            vendor.writeVendorsToFile();
-                            break;
-                         default:
-                            System.out.println("Error: Invalid input.");
-                            choice = kb.nextInt();
-                      }
-                   } while (choice != 1 && choice != 2);
-                   break;
+                  System.out.print("Which account would you like to remove? \n(1) Guest Account\n"
+                        + "(2) Vendor Account.\n-->");
+                  choice = kb.nextInt();
+                  do {
+                     switch (choice) {
+                        case 1:
+                           System.out.print("What is the guest name?\n-->");
+                           name = kb.nextLine();
+                           guest.removeGuest(name);
+                           guest.writeGuestsToFile();
+                           break;
+                        case 2:
+                           System.out.print("What is the vendor name?\n-->");
+                           name = kb.nextLine();
+                           vendor.removeVendor(name);
+                           vendor.writeVendorsToFile();
+                           break;
+                        default:
+                           System.out.println("Error: Invalid input.");
+                           choice = kb.nextInt();
+                     }
+                  } while (choice != 1 && choice != 2);
+                  break;
                case 6:
-                   System.out.print("Which accounts would you like to view? \n(1) Guest Account\n" + "(2) Vendor Account.\n-->");
-                   choice = kb.nextInt();
-                   do {
-                      switch (choice) {
-                         case 1:
-                            guest.readGuestFile();
-                            break;
-                         case 2:
-                            vendor.readVendorFile();
-                            break;
-                         default:
-                            System.out.println("Error: Invalid input.");
-                            choice = kb.nextInt();
-                      }
-                   } while (choice != 1 && choice != 2);
-                   break;
+                  System.out.print("Which accounts would you like to view?\n(1) Guest Account\n"
+                        + "(2) Vendor Account.\n-->");
+                  choice = kb.nextInt();
+                  do {
+                     switch (choice) {
+                        case 1:
+                           guest.readGuestFile();
+                           break;
+                        case 2:
+                           vendor.readVendorFile();
+                           break;
+                        default:
+                           System.out.println("Error: Invalid input.");
+                           choice = kb.nextInt();
+                     }
+                  } while (choice != 1 && choice != 2);
+                  break;
                case 7:
-                   System.out.println("Thank you for using the access panel.");
-                   System.exit(0);
+                  System.out.println("Thank you for using the access panel.");
+                  System.exit(0);
                default:
-                  System.out.println("Error: Please enter 1, 2, 3, or 4.");
+                  System.out.println("Error: Please enter 1, 2, 3, 4, 5, 6, or 7.");
                   choice = kb.nextInt();
             }
-         } while (choice < 1 || choice > 4);
+         } while (choice < 1 || choice > 7);
          System.out.println("Returning back to menu...");
          chooseOption();
       }
 
       //Vendor Options
       else if (user.isVendor()) {
-         System.out.printf("Hello %s, what do you want to do:\n(1) Purchase space.\n" + "(2) Exit Program.", user.getUsername());
+         System.out.printf("Hello %s, what do you want to do:\n(1) Purchase space.\n"
+               + "(2) Exit Program.", user.getUsername());
          choice = kb.nextInt();
          do {
             switch (choice) {
@@ -185,7 +192,7 @@ public class Permissions {
                   }
                   else if (userAnswer == 'n') {
                      break;
-               }
+                  }
                   else {
                      System.out.println("Error: Invalid input.");
                   }
@@ -195,14 +202,15 @@ public class Permissions {
                   System.out.println("Thank you for using the access panel.");
                   System.exit(0);
             }
-         } while (choice < 1 || choice > 4);
+         } while (choice < 1 || choice > 2);
          System.out.println("Returning back to menu...");
          chooseOption();
       }
 
       //Guest Options
       else if (user.isGuest()) { //Need to add permissions
-         System.out.printf("Hello %s, what do you want to do:\n(1) Purchase ticket.\n" + "(2) Exit Program.", user.getUsername());
+         System.out.printf("Hello %s, what do you want to do:\n(1) Purchase ticket.\n"
+               + "(2) Exit Program.", user.getUsername());
          choice = kb.nextInt();
          do {
             switch (choice) {
@@ -214,7 +222,7 @@ public class Permissions {
                      System.out.println("Thank you for purchasing a ticket.");
                      System.out.println("Returning back to menu...");
                   }
-                  else if (userAnswer == 'n'){
+                  else if (userAnswer == 'n') {
                      break;
                   }
                   else {
@@ -225,7 +233,7 @@ public class Permissions {
                   System.out.println("Thank you for using the access panel.");
                   System.exit(0);
             }
-         } while (choice < 1 || choice > 4);
+         } while (choice < 1 || choice > 2);
          System.out.println("Returning back to menu...");
          chooseOption();
       }

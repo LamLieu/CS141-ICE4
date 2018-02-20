@@ -1,6 +1,9 @@
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
+import java.nio.*;
 
 public class Guest extends User {
 
