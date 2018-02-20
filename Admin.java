@@ -10,11 +10,20 @@ public class Admin extends User {
    public Admin(){
 
    }
-   
+
    public Admin(String username, String password) {
+      try {
+        Files.createFile("adminUsers.dat");
+      } catch (FileAlreadyExistsException ignored) {
+        }
       setUsername(username);
       setPassword(password);
       setAdmin();
+      addAdmin(username);
+   }
+
+   public void addAdmin(String pass){
+     adminUsers.add(pass);
    }
 
    public void addPassword(String pass){
@@ -62,13 +71,4 @@ public class Admin extends User {
        e.printStackTrace();
      }
    }
-
-  /*
-  public String toString() {
-  String userInfo;
-  userInfo = "Username: " + getUsername()
-  + "Status: " + getStatus;
-  return userInfo;
-  }
-  */
 }

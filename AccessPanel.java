@@ -1,5 +1,3 @@
-//import java.io.*;
-
 public class AccessPanel {
 
    public static void main(String[] args) {

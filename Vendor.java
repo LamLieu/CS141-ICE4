@@ -7,12 +7,21 @@ public class Vendor extends User {
   private ArrayList<String> vendorUsers = new ArrayList<String>();
 
    public Vendor(String username, String password) {
+       try {
+         Files.createFile("vendorUsers.dat");
+       } catch (FileAlreadyExistsException ignored) {
+         }
       setUsername(username);
       setPassword(password);
       setVendor();
+      addVendor(username);
    }
 
-   public void readGuestFile() throws IOException {
+   public void addVendor(String pass){
+     vendorUsers.add(pass);
+   }
+
+   public void readVendorFile() throws IOException {
      File file = new File("guestUsers.dat");
      Scanner inputFile = new Scanner(file);
      while (inputFile.hasNext()){

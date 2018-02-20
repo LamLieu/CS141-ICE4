@@ -7,9 +7,18 @@ public class Guest extends User {
   private ArrayList<String> guestUsers = new ArrayList<String>();
 
    public Guest(String username, String password) {
+       try {
+         Files.createFile("guestUsers.dat");
+       } catch (FileAlreadyExistsException ignored) {
+         }
       setUsername(username);
       setPassword(password);
       setGuest();
+      addGuest(username);
+   }
+
+   public void addGuest(String pass){
+     guestUsers.add(pass);
    }
 
    public void readGuestFile() throws IOException {
